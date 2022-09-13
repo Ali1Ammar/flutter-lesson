@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:testing/src/material_app.dart';
 
-void main() => runApp(new MaterialApp(home: PositionedTiles()));
+void main() => runApp(MyApp());
 
 class PositionedTiles extends StatefulWidget {
   @override

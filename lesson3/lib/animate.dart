@@ -17,75 +17,71 @@ class _AnimateState extends State<Animate> {
     return SafeArea(
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
           children: [
             TextButton(
                 onPressed: () {
-                 setState(() {
+                  setState(() {
                     isWork = !isWork;
-                 });
+                  });
                 },
                 child: Text("Change")),
-              AnimatedOpacity(
-                opacity: isWork ? 0.75 : 0.25 ,
-                 duration: Duration(milliseconds: 500),
-                 child:  Container(
+            AnimatedOpacity(
+              opacity: isWork ? 0.75 : 0.25,
+              duration: Duration(milliseconds: 500),
+              child: Container(
                 width: 100,
                 height: 100,
-                color: Colors.red ,
+                color: Colors.red,
                 child: Text("Ok"),
               ),
-
+            ),
+            AnimatedCrossFade(
+              duration: Duration(milliseconds: 500),
+              crossFadeState:
+                  isWork ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              firstChild: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+                child: Text("Ok"),
               ),
-            // AnimatedCrossFade(
-            //   duration: Duration(milliseconds: 500),
-            //   crossFadeState:
-            //       isWork ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-            //   firstChild: Container(
-            //     width: 100,
-            //     height: 100,
-            //     color: Colors.red ,
-            //     child: Text("Ok"),
-            //   ),
-            //    secondChild: Container(
-            //     width: 100,
-            //     height: 100,
-            //     color: Colors.blue ,
-            //     child: Text("Two"),
-            //   ),
-            // ),
-           
-            //     ColorSonar(
-            //   // wavesDisabled: true,
-            //   // waveMotion: WaveMotion.synced,
-            //   contentAreaRadius: 90.0,
+              secondChild: Container(
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+                child: Text("Two"),
+              ),
+            ),
+            ColorSonar(
+              // wavesDisabled: true,
+              // waveMotion: WaveMotion.synced,
+              contentAreaRadius: 90.0,
 
-            //   waveFall: 5.0,
-            //   waveMotionEffect: Curves.elasticIn,
-            //   waveMotion: WaveMotion.synced,
-            //   // duration: Duration(seconds: 5),
-            //   child: CircleAvatar(
-            //     radius: 48.0,
-            //     backgroundImage: AssetImage('assets/avatars/man.png'),
-            //   ),
-            // ),
-            //   AnimatedAlign(
-            //     alignment: isWork ? Alignment.center : Alignment.topCenter,
-            //     duration: Duration(milliseconds: 500),
-            //     child: AnimatedContainer(
-            //       duration: Duration(milliseconds: 500),
-            //       curve: Curves.linear,
-            //       height: isWork ? 100 : 200,
-            //       color: isWork ? Colors.amber : Colors.red,
-            //       alignment: isWork ? Alignment.center : Alignment.topCenter,
-            //       child: TextButton(
-            //           onPressed: () {
-            //             setState(() {
-            //               isWork = !isWork;
-            //             });
-            //           },
-            //           child: Text("Hello")),
-            //     ),
-            //   ),
+              waveFall: 5.0,
+              waveMotionEffect: Curves.elasticIn,
+              waveMotion: WaveMotion.synced,
+              // duration: Duration(seconds: 5),
+              child: FlutterLogo(),
+            ),
+            AnimatedAlign(
+              alignment: isWork ? Alignment.center : Alignment.topCenter,
+              duration: Duration(milliseconds: 500),
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.linear,
+                height: isWork ? 100 : 200,
+                color: isWork ? Colors.amber : Colors.red,
+                alignment: isWork ? Alignment.center : Alignment.topCenter,
+                child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isWork = !isWork;
+                      });
+                    },
+                    child: Text("Hello")),
+              ),
+            ),
           ],
         ),
       ),

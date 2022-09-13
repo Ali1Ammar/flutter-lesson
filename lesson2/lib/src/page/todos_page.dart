@@ -43,22 +43,7 @@ class _TodosPageState extends State<TodosPage> {
               icon: Icon(Icons.start))
         ],
       ),
-      body: Board(
-            onClick: (index) {
-              print(index);
-            },
-            items: [
-              Player.o,
-              Player.x,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-            ],
-          ) ??
+      body: 
           FutureBuilder(
               future: data,
               builder: (context, snap) {
@@ -68,23 +53,11 @@ class _TodosPageState extends State<TodosPage> {
                   return CircularProgressIndicator();
                 }
                 if (snap.hasData) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 150,
-                    ),
-                    itemCount: snap.data!.length,
-                    itemBuilder: (context, index) {
-                      final item = snap.data![index];
-                      return TodoItemWidget(
-                          todo: item,
-                          value: set.contains(item),
-                          onCheck: () {
-                            onCheck(item);
-                          });
-                    },
-                  );
-                  // return ListView.builder(
+                  // return GridView.builder(
+                  //   gridDelegate:
+                  //       const SliverGridDelegateWithMaxCrossAxisExtent(
+                  //     maxCrossAxisExtent: 150,
+                  //   ),
                   //   itemCount: snap.data!.length,
                   //   itemBuilder: (context, index) {
                   //     final item = snap.data![index];
@@ -96,6 +69,18 @@ class _TodosPageState extends State<TodosPage> {
                   //         });
                   //   },
                   // );
+                  return ListView.builder(
+                    itemCount: snap.data!.length,
+                    itemBuilder: (context, index) {
+                      final item = snap.data![index];
+                      return TodoItemWidget(
+                          todo: item,
+                          value: set.contains(item),
+                          onCheck: () {
+                            onCheck(item);
+                          });
+                    },
+                  );
                 }
                 return Text("done");
               }),

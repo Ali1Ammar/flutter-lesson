@@ -38,42 +38,44 @@ class _BoardMangerState extends State<BoardManger> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-                color: Colors.yellow,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("now turn for ${turn.name}"),
-                )),
-          ),
-          if (winner != null) Text("the winner is ${winner!.name}"),
-          if (winner == null && isEnded) Text("end game with no winner"),
-          Expanded(
-            child: Board(
-              items: borard,
-              onClick: (index) {
-                if (isEnded) return;
-                if (borard[index] != null) {
-                  print("select empty location");
-                  return;
-                }
-                setState(() {
-                  borard[index] = turn;
-                  turn = turn == Player.o ? Player.x : Player.o;
-                });
-                checkIfThereWinner();
-                if (counter == 8 && winner == null) {
-                  isEnded = true;
-                }
-                counter++;
-              },
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                  color: Colors.yellow,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("now turn for ${turn.name}"),
+                  )),
             ),
-          )
-        ],
+            if (winner != null) Text("the winner is ${winner!.name}"),
+            if (winner == null && isEnded) Text("end game with no winner"),
+            Expanded(
+              child: Board(
+                items: borard,
+                onClick: (index) {
+                  if (isEnded) return;
+                  if (borard[index] != null) {
+                    print("select empty location");
+                    return;
+                  }
+                  setState(() {
+                    borard[index] = turn;
+                    turn = turn == Player.o ? Player.x : Player.o;
+                  });
+                  checkIfThereWinner();
+                  if (counter == 8 && winner == null) {
+                    isEnded = true;
+                  }
+                  counter++;
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
